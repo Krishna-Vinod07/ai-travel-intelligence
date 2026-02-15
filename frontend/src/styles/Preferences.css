@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&display=swap");
+
+.wizard-page {
+  min-height: 100vh;
+  background: #fbfaf7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
+  font-family: "Inter", sans-serif;
+}
+
+/* ===== STEPPER ===== */
+
+.stepper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.step {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f1f1ee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step.active,
+.step.done {
+  background: #1f8a8a;
+}
+
+.step-line {
+  width: 48px;
+  height: 2px;
+  background: #e5e5e0;
+}
+
+.active-line {
+  background: #1f8a8a;
+}
+
+/* ===== CARD ===== */
+
+.form-card {
+  background: #ffffff;
+  width: 680px;
+  max-width: 95%;
+  padding: 44px;
+  border-radius: 22px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
+}
+
+.form-card h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.4rem;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  color: #6b7280;
+  margin-bottom: 32px;
+}
+
+/* ===== SECTIONS ===== */
+
+.section {
+  margin-bottom: 28px;
+}
+
+.section h3 {
+  font-size: 1rem;
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+
+/* ===== OPTIONS ===== */
+
+.option-row {
+  display: flex;
+  gap: 16px;
+}
+
+.option {
+  flex: 1;
+  padding: 16px 0;
+  border-radius: 14px;
+  border: 2px solid #e5e5e0;
+  background: #fbfaf7;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.option.active {
+  border-color: #1f8a8a;
+  background: #eaf5f5;
+  color: #1f8a8a;
+  font-weight: 500;
+}
+
+/* ===== ACTIONS ===== */
+
+.divider {
+  height: 1px;
+  background: #eceae4;
+  margin: 40px 0 28px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.back {
+  background: none;
+  border: none;
+  color: #6b7280;
+}
+
+.next {
+  background: #1f8a8a;
+  border: none;
+  padding: 14px 34px;
+  border-radius: 999px;
+  color: white;
+  cursor: pointer;
+}
+
+/* ===== TRANSITION ===== */
+
+.slide {
+  opacity: 0;
+  transform: translateX(60px);
+}
+
+.slide.show {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}

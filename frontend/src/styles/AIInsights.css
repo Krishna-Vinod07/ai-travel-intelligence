@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap");
+
+/* ================= PAGE ================= */
+
+.ai-page {
+  min-height: 100vh;
+  background: #f7f5f1;
+  padding: 60px 20px 100px;
+  font-family: "Inter", sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+.ai-header {
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 50px;
+}
+
+.ai-header h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 56px;
+  font-weight: 700;
+  color: #1f2a2e;
+  margin-bottom: 20px;
+}
+
+.ai-summary {
+  color: #5b6a6d;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.back-link {
+  border: none;
+  background: none;
+  color: #6c757d;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
+/* ================= TABS ================= */
+
+.ai-tabs {
+  max-width: 950px;
+  margin: 0 auto 40px;
+  display: flex;
+  gap: 10px;
+  background: #ffffff;
+  padding: 8px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.ai-tab {
+  flex: 1;
+  padding: 14px 0;
+  border-radius: 12px;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.ai-tab.active {
+  background: #1f8a8a;
+  color: #ffffff;
+}
+
+/* ================= CONTENT ================= */
+
+.ai-content {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+/* ================= GRID ================= */
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+/* ================= LUX CARD ================= */
+
+.lux-card {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 24px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.07);
+  transition: 0.3s ease;
+}
+
+.lux-card:hover {
+  transform: translateY(-5px);
+}
+
+/* ================= TYPOGRAPHY ================= */
+
+.title {
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: "Playfair Display", serif;
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+.muted {
+  color: #6b7280;
+}
+
+.small {
+  font-size: 14px;
+}
+
+.description {
+  margin-top: 16px;
+  line-height: 1.8;
+  color: #4b5563;
+}
+
+.price {
+  margin-top: 18px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1f8a8a;
+}
+
+/* ================= STAY HEADER ================= */
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating {
+  font-weight: 600;
+  color: #f59e0b;
+}
+
+/* ================= PILLS ================= */
+
+.pill-row {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pill {
+  background: #eae6dd;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+/* ================= SEE TIMELINE ================= */
+
+.vertical-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.timeline-card {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 24px;
+  display: flex;
+  gap: 25px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.06);
+}
+
+.day-badge {
+  background: #1f8a8a;
+  color: white;
+  padding: 15px 18px;
+  border-radius: 14px;
+  font-weight: 600;
+  height: fit-content;
+}
+
+/* ================= PACK ================= */
+
+.pack-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.check {
+  background: #1f8a8a;
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+/* ================= BUDGET ================= */
+
+.budget-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.budget-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.tips {
+  padding-left: 20px;
+  line-height: 1.8;
+}
+
+.pack-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px 60px;
+  margin-top: 15px;
+}
+

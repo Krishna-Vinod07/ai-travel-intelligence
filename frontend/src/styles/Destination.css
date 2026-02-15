@@ -1,0 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500&display=swap");
+
+/* ================= PAGE ================= */
+
+.wizard-page {
+  min-height: 100vh;
+  background: #fbfaf7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
+  font-family: "Inter", sans-serif;
+}
+
+/* ================= STEPPER ================= */
+
+
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 60px;
+  gap: 18px;
+}
+
+.step {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #e9eceb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.step .icon {
+  font-size: 20px;
+  opacity: 0.6;
+}
+
+.step.active {
+  background: #2f8c8c; /* Teal Blue */
+  box-shadow: 0 8px 20px rgba(47, 140, 140, 0.3);
+}
+
+.step.active .icon {
+  color: #ffffff;
+  opacity: 1;
+}
+
+.step-line {
+  width: 60px;
+  height: 2px;
+  background: #e5e7eb;
+}
+
+
+
+/* ================= CARD ================= */
+
+.form-card {
+  background: #ffffff;
+  width: 620px;
+  max-width: 92%;
+  padding: 44px;
+  border-radius: 22px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
+}
+
+/* ================= TYPOGRAPHY ================= */
+
+.form-card h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.subtitle {
+  color: #6b7280;
+  margin-bottom: 32px;
+  font-size: 1rem;
+}
+
+/* ================= FORM FIELD ================= */
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #374151;
+}
+
+input {
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  font-size: 1rem;
+  background: #fbfaf7;
+  outline: none;
+}
+
+input::placeholder {
+  color: #9ca3af;
+}
+
+input:focus {
+  border-color: #1f8a8a;
+  background: #ffffff;
+}
+
+/* ================= DIVIDER ================= */
+
+.divider {
+  height: 1px;
+  background: #eceae4;
+  margin: 40px 0 28px;
+}
+
+/* ================= ACTIONS ================= */
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 1rem;
+  cursor: not-allowed;
+}
+
+.next {
+  background: #9ccfce;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 999px;
+  font-size: 1rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.next:hover {
+  background: #1f8a8a;
+  transform: translateY(-1px);
+}
+
+/* ================= ANIMATION ================= */
+
+/* Initial state (off-screen right) */
+.slide {
+  opacity: 0;
+  transform: translateX(60px);
+}
+
+/* Visible state */
+.slide.show {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 640px) {
+  .form-card {
+    padding: 32px;
+  }
+
+  .form-card h1 {
+    font-size: 2rem;
+  }
+}
