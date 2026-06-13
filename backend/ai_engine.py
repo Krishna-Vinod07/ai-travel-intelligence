@@ -1,6 +1,7 @@
 import os
 import json
 import re
+from datetime import datetime
 from openai import OpenAI
 from dotenv import load_dotenv
 
@@ -23,6 +24,22 @@ def extract_json(text):
 
 
 def generate_ai_travel_plan(data):
+
+    try:
+        # Calculate trip duration
+        start = datetime.strptime(data["startDate"], "%Y-%m-%d")
+        end = datetime.strptime(data["endDate"], "%Y-%m-%d")
+
+        trip_days = (end - start).days + 1
+
+        if trip_days <= 0:
+            trip_days = 1
+
+    except Exception:
+        trip_days = 7
+
+    print(f"📅 Trip Duration: {trip_days} days")
+
     prompt = f"""
 You are an expert AI travel planner.
 
@@ -33,45 +50,88 @@ IMPORTANT:
 - No text before or after JSON.
 - Strict JSON only.
 
+TRIP RULES:
+- Generate EXACTLY {trip_days} days.
+- The value of "days" MUST be {trip_days}.
+- Do NOT generate more days.
+- Do NOT generate fewer days.
+- Do NOT default to 7 days.
+- Distribute sightseeing activities across all {trip_days} days.
+
 User Details:
-Destination: {data['destination']}
-Budget: {data['budget']}
-Travel Type: {data['travelType']}
-Pace: {data['pace']}
-Interests: {', '.join(data['interests'])}
-Food Preferences: {', '.join(data['foodPreferences'])}
+Destination: {data.get('destination', '')}
+Start Date: {data.get('startDate', '')}
+End Date: {data.get('endDate', '')}
+Trip Duration: {trip_days} days
+Budget: {data.get('budget', 0)}
+Travel Type: {data.get('travelType', '')}
+Accommodation Preference: {data.get('accommodation', '')}
+Pace: {data.get('pace', '')}
+Interests: {', '.join(data.get('interests', []))}
+Food Preferences: {', '.join(data.get('foodPreferences', []))}
 
 Generate:
 
-- 6 stays with:
-  name, type, price (numeric), rating (numeric),
-  features (array),
-  reason (2 lines description)
+1. SIX stay recommendations:
+- name
+- type
+- price (numeric)
+- rating (numeric)
+- features (array)
+- reason
 
-- 6 restaurants with:
-  name,
-  cuisine,
-  price_level ( $, $$, $$$, $$$$ ),
-  meal_type (Breakfast/Lunch/Dinner/Snack),
-  description (1–2 lines about ambiance/location),
-  reason (why recommended based on user preferences)
+2. SIX restaurant recommendations:
+- name
+- cuisine
+- price_level
+- meal_type
+- description
+- reason
 
-- 10 sightseeing items with:
-  day,
-  title,
-  time,
-  duration,
-  category,
-  description
+3. Sightseeing itinerary:
+- Cover EXACTLY {trip_days} days
+- Include 3 to 5 activities per day
+- Each activity must contain:
+  - day
+  - title
+  - time
+  - duration
+  - category
+  - description
 
-- Full detailed packing breakdown
+4. Detailed packing list
 
-- Budget breakdown including savingsTips
+5. Budget breakdown
 
-Return JSON format:
+6. Travel scores (0-100):
+- budgetMatch
+- adventure
+- food
+- comfort
+
+7. Travel Highlights:
+Generate exactly 5 highlights:
+- Best photo spot
+- Best sunset location
+- Must-try local food
+- Hidden gem
+- Local travel tip
+8. AI Insights
+
+Generate a detailed paragraph explaining:
+
+- Why these hotels were selected
+- Why these restaurants match the user
+- How the itinerary matches the selected pace
+- How the budget was allocated
+- Why the activities fit the user's interests
+
+Minimum 4 sentences.
+
+Return ONLY this JSON structure:
 
 {{
-  "days": number,
+  "days": {trip_days},
 
   "stay": [
     {{
@@ -115,33 +175,54 @@ Return JSON format:
   }},
 
   "budget": {{
-    "Accommodation": 0,
-    "Food": 0,
-    "Transport": 0,
-    "Activities": 0,
-    "Shopping": 0,
-    "Miscellaneous": 0,
-    "Total": 0,
-    "savingsTips": []
-  }},
+  "Accommodation": 0,
+  "Food": 0,
+  "Transport": 0,
+  "Activities": 0,
+  "Shopping": 0,
+  "Miscellaneous": 0,
+  "Total": 0,
+  "savingsTips": []
+}},
+
+"scores": {{
+  "budgetMatch": 0,
+  "adventure": 0,
+  "food": 0,
+  "comfort": 0
+}},
+
+"travelHighlights": [
+  "Best photo spot: ...",
+  "Best sunset location: ...",
+  "Must-try food: ...",
+  "Hidden gem: ...",
+  "Local travel tip: ..."
+]
+
+"aiInsights": ""
 
   "aiInsights": ""
 }}
 """
 
-
     try:
         response = client.chat.completions.create(
             model="llama-3.3-70b-versatile",
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.7
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.5
         )
 
         text = response.choices[0].message.content.strip()
 
-        print("🔵 RAW AI RESPONSE:\n", text)
+        print("\n🔵 RAW AI RESPONSE:")
+        print(text)
 
-        # Extract only JSON
         clean_json = extract_json(text)
 
         if not clean_json:
@@ -149,7 +230,8 @@ Return JSON format:
 
         parsed = json.loads(clean_json)
 
-        print("✅ AI PLAN GENERATED SUCCESSFULLY")
+        print(f"\n✅ Requested Days: {trip_days}")
+        print(f"✅ Returned Days: {parsed.get('days')}")
 
         return parsed
 
@@ -157,11 +239,32 @@ Return JSON format:
         print("🔥 GROQ ERROR:", e)
 
         return {
-            "days": 0,
+            "days": trip_days,
             "stay": [],
             "eat": [],
             "see": [],
-            "pack": {},
-            "budget": {"savingsTips": []},
+            "pack": {
+                "clothing": [],
+                "toiletries": [],
+                "electronics": [],
+                "documents": [],
+                "health": []
+            },
+            "budget": {
+                "Accommodation": 0,
+                "Food": 0,
+                "Transport": 0,
+                "Activities": 0,
+                "Shopping": 0,
+                "Miscellaneous": 0,
+                "Total": 0,
+                "savingsTips": []
+            },
+            "scores": {
+    "budgetMatch": 0,
+    "adventure": 0,
+    "food": 0,
+    "comfort": 0
+},
             "aiInsights": "AI generation failed."
         }
