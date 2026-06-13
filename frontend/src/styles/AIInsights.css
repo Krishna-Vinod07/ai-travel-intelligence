@@ -389,3 +389,129 @@ textarea{
   border-radius:12px;
   background:#f3f4f6;
 }
+
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
+  .ai-page {
+    padding: 20px 12px 60px;
+  }
+
+  .ai-header h1 {
+    font-size: 34px;
+  }
+
+  .ai-summary {
+    font-size: 15px;
+  }
+
+  /* Tabs */
+  .ai-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 6px;
+    gap: 8px;
+  }
+
+  .ai-tab {
+    min-width: 100px;
+    flex: none;
+  }
+
+  /* Stay / Eat cards */
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Score cards */
+  .scores-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .score-card {
+    padding: 16px;
+  }
+
+  .score-card h2 {
+    font-size: 24px;
+  }
+
+  /* Budget */
+  .budget-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-container {
+    height: 250px;
+  }
+
+  /* Pack */
+  .pack-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  /* Timeline */
+  .timeline-card {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .timeline-time {
+    min-width: auto;
+  }
+
+  /* Cards */
+  .lux-card,
+  .day-section {
+    padding: 18px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .section-title {
+    font-size: 22px;
+  }
+
+  .price {
+    font-size: 18px;
+  }
+
+  /* Chat */
+  textarea {
+    min-height: 100px;
+  }
+
+  .quick-actions {
+    flex-direction: column;
+  }
+
+  .quick-actions button {
+    width: 100%;
+  }
+}
+
+/* Extra Small Phones */
+
+@media (max-width: 480px) {
+
+  .scores-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-header h1 {
+    font-size: 28px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .section-title {
+    font-size: 20px;
+  }
+
+}
